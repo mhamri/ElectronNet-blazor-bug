@@ -1,3 +1,5 @@
+using ElectronNET.API;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -7,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ElectronNet.Blazor.Server
 {
@@ -55,6 +58,8 @@ namespace ElectronNet.Blazor.Server
                 endpoints.MapControllers();
                 endpoints.MapFallbackToFile("index.html");
             });
+
+            Task.Run(async () => await Electron.WindowManager.CreateWindowAsync());
         }
     }
 }
